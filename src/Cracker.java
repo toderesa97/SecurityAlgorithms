@@ -1,3 +1,4 @@
+import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.util.ArrayList;
 import java.util.Objects;
@@ -13,6 +14,30 @@ public class Cracker {
             if (Objects.equals(generateSHA256(var), h)) return var;
         }
         return null;
+    }
+
+    public static BigInteger calculateInverse(BigInteger number, int zp) {
+
+        return null;
+    }
+
+    public static int euclidean_gcd(int a, int b) {
+        // implementing Euclidean algorithm
+        int greater, lower;
+        if (b > a) {
+            greater = b;
+            lower = a;
+        } else {
+            greater = a;
+            lower = b;
+        }
+        int remainder = -1;
+        while (remainder != 0) {
+            greater = lower*(greater/lower) + (remainder=greater-(lower*(greater/lower)));
+            greater = lower;
+            lower = remainder;
+        }
+        return greater;
     }
 
     private static ArrayList<String> permute(String chars) {

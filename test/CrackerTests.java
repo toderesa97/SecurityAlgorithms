@@ -1,6 +1,6 @@
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
-import org.junit.runners.JUnit4;
+
 import java.io.UnsupportedEncodingException;
 import java.security.*;
 import java.util.*;
@@ -40,5 +40,18 @@ public class CrackerTests {
         } catch (NoSuchAlgorithmException | UnsupportedEncodingException ex) {
             throw new RuntimeException();
         }
+    }
+
+    @Test
+    public void mcdTests() {
+        assertEquals(1, Cracker.euclidean_gcd(45,7));
+        assertEquals(5, Cracker.euclidean_gcd(45,5));
+        assertEquals(10, Cracker.euclidean_gcd(50,10));
+        assertEquals(1, Cracker.euclidean_gcd(157,211));
+        assertEquals(20, Cracker.euclidean_gcd(180,80));
+        assertEquals(9, Cracker.euclidean_gcd(180,81));
+        assertEquals(6, Cracker.euclidean_gcd(174,180));
+        assertEquals(12, Cracker.euclidean_gcd(48,60));
+        assertEquals(1, Cracker.euclidean_gcd(18574,459));
     }
 }
