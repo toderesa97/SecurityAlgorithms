@@ -2,6 +2,7 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
 import java.io.UnsupportedEncodingException;
+import java.math.BigInteger;
 import java.security.*;
 import java.util.*;
 
@@ -53,5 +54,14 @@ public class CrackerTests {
         assertEquals(6, Cracker.euclidean_gcd(174,180));
         assertEquals(12, Cracker.euclidean_gcd(48,60));
         assertEquals(1, Cracker.euclidean_gcd(18574,459));
+        assertEquals(100, Cracker.euclidean_gcd(100,100));
+        assertEquals(4, Cracker.euclidean_gcd(816,2260));
+    }
+
+    @Test
+    public void inverseTests() {
+        assertEquals(-1, Cracker.calculateInverse(12, 8));
+        assertEquals(9, Cracker.calculateInverse(5, 11));
+        assertEquals(2, Cracker.calculateInverse(127, 11));
     }
 }

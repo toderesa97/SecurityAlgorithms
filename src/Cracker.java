@@ -1,6 +1,8 @@
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 import javax.xml.bind.DatatypeConverter;
 
@@ -16,10 +18,33 @@ public class Cracker {
         return null;
     }
 
-    public static BigInteger calculateInverse(BigInteger number, int zp) {
-
-        return null;
+    public static int calculateInverse(int number, int zp) {
+        if (euclidean_gcd(number, zp) != 1) {
+            return -1;
+        }
+        ArrayList<Integer> g_int = new ArrayList<>();
+        ArrayList<Integer> u_int = new ArrayList<>();
+        ArrayList<Integer> v_int = new ArrayList<>();
+        g_int.add(zp);
+        g_int.add(number);
+        u_int.add(1);
+        u_int.add(0);
+        v_int.add(0);
+        v_int.add(1);
+        int i = 1;
+        for(; g_int.get(i) != 0; i++) {
+            int yi = (g_int.get(i-1)/g_int.get(i));
+            g_int.add(g_int.get(i-1)-yi*g_int.get(i));
+            u_int.add(u_int.get(i-1)-yi*u_int.get(i));
+            v_int.add(v_int.get(i-1)-yi*v_int.get(i));
+        }
+        int aux = 0;
+        if ((aux = v_int.get(i-1)) < 0) {
+            v_int.add(i-1, aux+zp);
+        }
+        return v_int.get(i-1);
     }
+
 
     public static int euclidean_gcd(int a, int b) {
         // implementing Euclidean algorithm
