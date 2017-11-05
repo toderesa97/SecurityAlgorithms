@@ -77,7 +77,7 @@ Contains a set of functions related to basic cipher algorithm, such as affine ci
  case, we know that ``gcd(a,zp)=1``, therefore, ``a*x+zp*y=1``
  
  Example: calculate the inverse of 2 in Z3: Since ``gcd(2,3)=1`` there's an inverse. Hence, ``2*x+3*y=1``. Rewriting 1,
- ``2*x+3*y=2-1``, and 3, ``2*x+3*y=2-(3-2) => 2*x+3*y=2*2-3*1``, so:
+ ``2*x+3*y=2-1``, again, to express in terms of 2 and 3, ``2*x+3*y=2-(3-2) => 2*x+3*y=2*2-3*1``, so:
  
  ``(2*2+3*(-1))mod(3)=1    => (2*2)mod(3)``, the inverse is 2.
  
