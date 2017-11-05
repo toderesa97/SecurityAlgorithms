@@ -35,3 +35,61 @@ Contains a set of functions related to basic cipher algorithm, such as affine ci
   **Frequency of characters (English)**
   
   ![alt text](https://upload.wikimedia.org/wikipedia/commons/d/d5/English_letter_frequency_%28alphabetic%29.svg)
+  
+  
+  ### Appendix
+  
+  ##### Method ``calculateInverse(int number, int zp) ``
+  *Basic approach*
+  
+  Calculating the multiplicative inverse is a crucial fact for the RSA cryptosystem. Z3 is an arithmetic such that works
+  with ``{0,1,2}``. Calculating an inverse multiplicative of a number (``a``) is figuring out a number ``i`` 
+  such that ``(a*i)mod(p)=1``. For this purpose, ``a`` and ``i`` must be relatively primes. Otherwise it won't be possible to 
+  find ``i``. Trial and error method is possible but for large integers is suitable the use of Euclidean and Bézout's theorem
+   (actually is a combination, coalesced on the extended euclidean algorithm)
+  
+  **Example**: calculate the inverse multiplicative of 5 in Z13 (not using the said theorem)
+  
+  Since ``gcd(5,13)=1`` exists an ``i`` such that ``(5*i)mod(13)=1``. We know that:
+  
+  ``5*i=13*q+1  =>  5*i-1=13*q   =>   (5*i-1)/13=q``
+  
+  It's a little bit cumbersome to try with values of ``i`` such that ``5*i-1 < 13``, since denominator will be always greater than numerator.
+  So, ``i`` must start from ``i=ceil(12/5)=3``. First approach could be:
+  
+  
+      for (int i = (int) Math.ceil((zp-1)/a); i < zp; i++) {
+    
+          if (Math.floorMod(a*i,zp) == 1) return i;
+      }
+      return -1;
+      
+  Complexity is ``O(zp)``. This method is not efficient for large inputs but it works. We need the extended euclidean algorithm which has a complexity
+  of ``O(log(zp))``
+  
+  -
+
+ *Advanced approach*: using The Extended Euclidean Algorithm
+ 
+ Please, consider reading about the Euclidean and Bézout's theorem before continuing if you are not familiar with.
+ 
+ If ``gcd(a,b)=m``, then exists two numbers ``x and y`` such that ``a*x+b*y=m`` (Bézout's theorem). Applied to our 
+ case, we know that ``gcd(a,zp)=1``, therefore, ``a*x+zp*y=1``
+ 
+ Example: calculate the inverse of 2 in Z3: Since ``gcd(2,3)=1`` there's an inverse. Hence, ``2*x+3*y=1``. Rewriting 1,
+ ``2*x+3*y=2-1``, and 3, ``2*x+3*y=2-(3-2) => 2*x+3*y=2*2-3*1``, so:
+ 
+ ``(2*2+3*(-1))mod(3)=1    => (2*2)mod(3)``, the inverse is 2.
+ 
+ 
+ 
+ 
+ 
+ 
+  
+  
+  
+  
+  
+  
+  
